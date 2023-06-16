@@ -2,4 +2,8 @@ extends layout
 
 block content
   h1= title
-  p Welcome to #{title}
+  p(class='h4 text-center') Welcome to #{title} - the most exclusive open clubhouse in the world.
+  p(class='h5 text-center mt-5') Get started by signing up or logging in!
+  .m-3.text-center.p-3
+    a(href='/sign-up' class='btn btn-primary mx-2') Sign up 
+    a(href='/log-in' class='btn btn-success mx-2') Log in

@@ -4,7 +4,7 @@ const path = require("path");
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
 const mongoose = require("mongoose");
-const dotenv = require("dotenv");
+require("dotenv").config();
 
 mongoose.set("strictQuery", false);
 

@@ -1,0 +1,25 @@
+extends layout 
+
+block content 
+    h1 Sign Up 
+    form(action="", method="post")
+        .form-group
+            label(for="first_name") First name
+            input(class="form-control" type="text" id="first_name" name="first_name" value=(undefined===first_name ? '' : first_name))
+        .form-group
+            label(for="last_name") Last name
+            input(class="form-control" type="text" id="last_name" name="last_name" value=(undefined===last_name ? '' : last_name))  
+        .form-group
+            label(for="username") Username
+            input(class="form-control" type="text" id="username" name="username" value=(undefined===username ? '' : username))
+        .form-group
+            label(for="password") Password 
+            input(class="form-control" type="password" id="password" name="password")
+        .form-group
+            label(for="password_confirm") Confirm password 
+            input(class="form-control" type="password" id="password_confirm" name="password_confirm")
+        button(type="submit" class="btn btn-success") Sign up
+    if errors
+        ul
+            for error in errors 
+                li!= error.msg

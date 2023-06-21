@@ -10,7 +10,15 @@ router.get("/", function (req, res, next) {
 router.get("/sign-up", function (req, res, next) {
   res.render("sign-up");
 });
-
 router.post("/sign-up", AuthenticationController.signup);
+
+router.get("/log-in", (req, res, next) => {
+  res.render("log-in");
+});
+router.post("/log-in", AuthenticationController.login);
+
+router.get("/success", (req, res, next) => {
+  res.render("success");
+});
 
 module.exports = router;

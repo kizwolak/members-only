@@ -1,0 +1,12 @@
+extends layout 
+
+block content 
+    h4 Please log in here.
+    form(action="/log-in" method="POST")
+        .form-group
+            label(for="username") Username 
+            input(type="text" name="username" placeholder="username" class="form-control")
+        .form-group
+            label(for="password") Password 
+            input(type="password" name="password" placeholder="password" class="form-control")
+        button(type="submit" class="btn btn-primary") Log in   

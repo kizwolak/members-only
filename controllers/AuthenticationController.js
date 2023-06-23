@@ -97,7 +97,7 @@ exports.login = [
     .escape(),
 
   passport.authenticate("local", {
-    successRedirect: "/success",
+    successRedirect: "/homepage",
     failureRedirect: "/failure",
   }),
 ];

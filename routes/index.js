@@ -17,9 +17,9 @@ router.get("/log-in", (req, res, next) => {
 });
 router.post("/log-in", AuthenticationController.login);
 
-router.get("/success", (req, res, next) => {
+router.get("/homepage", (req, res, next) => {
   const user = req.user;
-  res.render("success", { user: user });
+  res.render("homepage", { user: user });
 });
 
 module.exports = router;

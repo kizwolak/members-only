@@ -6,7 +6,7 @@ const UserSchema = new Schema({
   first_name: { type: String, required: true, maxLength: 20 },
   last_name: { type: String, required: true, maxLength: 30 },
   username: { type: String, required: true, maxLength: 15 },
-  password: { type: String, required: true },
+  password: { type: String, required: true, maxLength: 60 },
   club: [{ type: Schema.ObjectId, required: true }],
 });
 

@@ -90,9 +90,9 @@ exports.login = [
     .trim()
     .isLength({ min: 1 })
     .escape(),
-  body("password", "Password must be specified")
+  body("password", "Password must be specified or is too long")
     .trim()
-    .isLength({ min: 1 })
+    .isLength({ min: 1, max: 60 })
     .escape(),
 
   passport.authenticate("local", {

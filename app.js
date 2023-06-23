@@ -30,6 +30,7 @@ app.use(
     secret: process.env.SECRET,
     resave: false,
     saveUninitialized: true,
+    cookie: { _expires: 60000000 },
   })
 );
 

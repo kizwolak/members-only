@@ -18,7 +18,8 @@ router.get("/log-in", (req, res, next) => {
 router.post("/log-in", AuthenticationController.login);
 
 router.get("/success", (req, res, next) => {
-  res.render("success");
+  const user = req.user;
+  res.render("success", { user: user });
 });
 
 module.exports = router;

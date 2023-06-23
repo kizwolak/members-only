@@ -22,9 +22,21 @@ exports.create = [
         owner: req.user._id,
       });
       const result = await club.save();
-      res.render("homepage");
+      console.log(club);
+      res.render("view-club", {
+        title: club.name,
+        code: club.join_code,
+      });
     } catch (err) {
       return next(err);
     }
   }),
 ];
+
+exports.display = asyncHandler(async (req, res, next) => {
+  const club = Club.findById(req.params.id).exec();
+  res.render("view-club", {
+    title: club.name,
+    code: club.join_code,
+  });
+});

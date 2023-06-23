@@ -7,4 +7,6 @@ router.get("/create-club", (req, res, next) => {
 });
 router.post("/create-club", ClubManageController.create);
 
+router.get("/clubs/view-club/:id", ClubManageController.display);
+
 module.exports = router;

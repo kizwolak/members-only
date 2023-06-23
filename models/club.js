@@ -2,18 +2,18 @@ const mongoose = require("mongoose");
 
 const Schema = mongoose.Schema;
 
-const ClubhouseSchema = new Schema({
+const ClubSchema = new Schema({
   name: { type: String, required: true, maxLength: 100, minLength: 1 },
   messages: [{ type: Schema.ObjectId, required: true }],
   owner: { type: Schema.ObjectId, required: true },
   mods: [{ type: Schema.ObjectId }],
 });
 
-ClubhouseSchema.virtual("url").get(function () {
-  return "/club/" + this._id;
+ClubSchema.virtual("url").get(function () {
+  return "/clubs/view-club/" + this._id;
 });
 
-ClubhouseSchema.virtual("join_code").get(function () {
+ClubSchema.virtual("join_code").get(function () {
   let result = "";
   const characters =
     "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
@@ -29,4 +29,4 @@ ClubhouseSchema.virtual("join_code").get(function () {
   return result;
 });
 
-module.exports = mongoose.model("Clubhouse", ClubhouseSchema);
+module.exports = mongoose.model("Club", ClubSchema);

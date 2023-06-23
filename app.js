@@ -7,6 +7,7 @@ const mongoose = require("mongoose");
 const passport = require("passport");
 const User = require("./models/user");
 const session = require("express-session");
+const MongoStore = require("connect-mongo");
 require("dotenv").config();
 
 mongoose.set("strictQuery", false);
@@ -18,6 +19,7 @@ async function main() {
 
 const indexRouter = require("./routes/index");
 const usersRouter = require("./routes/users");
+const clubManageRouter = require("./routes/clubManage");
 
 const app = express();
 
@@ -30,12 +32,22 @@ app.use(
     secret: process.env.SECRET,
     resave: false,
     saveUninitialized: true,
-    cookie: { _expires: 60000000 },
+    cookie: { maxAge: 1000 * 60 * 60 * 24 },
+    store: MongoStore.create({
+      mongoUrl: process.env.MONGODB,
+      collectionName: "sessions",
+    }),
   })
 );
 
 app.use(passport.initialize());
 app.use(passport.session());
+
+app.use((req, res, next) => {
+  console.log(req.session);
+  console.log(req.user);
+  next();
+});
 
 app.use(logger("dev"));
 app.use(express.json());
@@ -45,6 +57,7 @@ app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
+app.use("/club-manage", clubManageRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
@@ -66,13 +79,12 @@ passport.serializeUser(function (user, done) {
   done(null, user.id);
 });
 
-passport.deserializeUser(async function (id, done) {
-  try {
-    const user = await User.findById(id);
-    done(null, user);
-  } catch (err) {
-    done(err);
-  }
+passport.deserializeUser(async function (userId, done) {
+  User.findById(userId)
+    .then((user) => {
+      done(null, user);
+    })
+    .catch((err) => done(err));
 });
 
 module.exports = app;

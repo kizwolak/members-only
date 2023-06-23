@@ -19,6 +19,7 @@ router.post("/log-in", AuthenticationController.login);
 
 router.get("/homepage", (req, res, next) => {
   const user = req.user;
+  console.log("session: " + req.session.id);
   res.render("homepage", { user: user });
 });
 

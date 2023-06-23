@@ -53,7 +53,6 @@ exports.signup = [
 
   asyncHandler(async (req, res, next) => {
     const errors = validationResult(req);
-    console.log("first name: " + req.body.first_name);
 
     if (!errors.isEmpty()) {
       res.render("sign-up", {

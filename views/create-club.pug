@@ -1,0 +1,14 @@
+extends layout
+
+block content 
+
+    h1 Create a Club 
+    form(action="", method="post")
+        .form-group 
+            label(for="name") Club name 
+            input(class="form-control" type="text" id="name" name="name" value=(undefined===name ? '' : name))
+        button(type="submit" class="btn btn-success") Create Club 
+    if errors 
+        ul 
+            for error in errors 
+                li!= error.msg

@@ -17,13 +17,12 @@ exports.create = [
     }
 
     try {
-      if (err) {
-        return next(err);
-      } else {
-        const club = new Club({
-          name: req.body.name,
-        });
-      }
+      const club = new Club({
+        name: req.body.name,
+        owner: req.user._id,
+      });
+      const result = await club.save();
+      res.render("homepage");
     } catch (err) {
       return next(err);
     }

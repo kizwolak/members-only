@@ -2,8 +2,17 @@ extends layout
 
 block content 
 
-    h1 Home Page 
+    if (user)
+        h1 Home Page 
 
-    .d-flex.justify-content-around.float-end(style="gap: 2rem;")
-        button(class="btn btn-primary") Create a Club 
-        button(class="btn btn-success") Join a Club 
+        .d-flex.flex-column.float-end.align-items-center(style="gap: 4rem;")
+            .d-flex.justify-content-around.float-end(style="gap: 2rem;")
+                button(class="btn btn-primary") Create a Club 
+                button(class="btn btn-success") Join a Club
+            .d-flex.flex-column.align-items-center(style="gap: 2rem;") 
+                h3 Club list
+
+        .d-flex.flex-column.float-start.align-items-center(style="gap: 2rem;")
+            h1 New posts from your Clubs 
+    else
+        h1 ZOINKS! 404!

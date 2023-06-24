@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 const { body, validationResult } = require("express-validator");
 const asyncHandler = require("express-async-handler");
 const Club = require("../models/club");
+const User = require("../models/user");
 
 exports.create = [
   body("name", "Name must be specified").trim().isLength({ min: 1 }).escape(),
@@ -22,7 +23,11 @@ exports.create = [
         owner: req.user._id,
       });
       const result = await club.save();
-      console.log(club);
+      console.log(req.user);
+      await User.findOneAndUpdate(
+        { _id: req.user._id },
+        { $push: { club: result._id } }
+      );
       res.render("view-club", {
         title: club.name,
         code: club.join_code,

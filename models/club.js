@@ -7,13 +7,14 @@ const ClubSchema = new Schema({
   messages: [{ type: Schema.ObjectId, required: true }],
   owner: { type: Schema.ObjectId, required: true },
   mods: [{ type: Schema.ObjectId }],
+  join_code: { type: String, default: generateCode() },
 });
 
 ClubSchema.virtual("url").get(function () {
   return "/clubs/view-club/" + this._id;
 });
 
-ClubSchema.virtual("join_code").get(function () {
+function generateCode() {
   let result = "";
   const characters =
     "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
@@ -27,6 +28,6 @@ ClubSchema.virtual("join_code").get(function () {
     }
   }
   return result;
-});
+}
 
 module.exports = mongoose.model("Club", ClubSchema);

@@ -48,12 +48,14 @@ exports.display = asyncHandler(async (req, res, next) => {
 });
 
 exports.join = asyncHandler(async (req, res, next) => {
-  const club = Club.findOne({ join_code: req.join_code }).exec();
+  const club = await Club.findOne({ join_code: req.body.code }).exec();
+  console.log("joined club: " + club);
   await User.findOneAndUpdate(
     { _id: req.user._id },
     { $push: { club: club._id } }
   );
-  res.redirect("homepage");
+  res.redirect("../homepage");
 });
 
 // ErYM-9KM0-srLb
+// In40-3DpV-ucB4

@@ -27,7 +27,7 @@ exports.create = [
         { _id: req.user._id },
         { $push: { club: result._id } }
       );
-      res.render("view-club", {
+      res.redirect("/clubs/view-club/" + club._id, {
         title: club.name,
         code: club.join_code,
       });

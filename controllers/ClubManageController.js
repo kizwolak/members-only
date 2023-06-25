@@ -23,7 +23,6 @@ exports.create = [
         owner: req.user._id,
       });
       const result = await club.save();
-      console.log(req.user);
       await User.findOneAndUpdate(
         { _id: req.user._id },
         { $push: { club: result._id } }
@@ -39,9 +38,22 @@ exports.create = [
 ];
 
 exports.display = asyncHandler(async (req, res, next) => {
-  const club = Club.findById(req.params.id).exec();
+  const club = await Club.findById(req.params.id).exec();
+  const members = await User.find({ club: club._id }).exec();
   res.render("view-club", {
     title: club.name,
     code: club.join_code,
+    members: members,
   });
 });
+
+exports.join = asyncHandler(async (req, res, next) => {
+  const club = Club.findOne({ join_code: req.join_code }).exec();
+  await User.findOneAndUpdate(
+    { _id: req.user._id },
+    { $push: { club: club._id } }
+  );
+  res.redirect("homepage");
+});
+
+// ErYM-9KM0-srLb

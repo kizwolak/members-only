@@ -5,6 +5,7 @@ const User = require("../models/user");
 const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
 const bcrypt = require("bcryptjs");
+const { application } = require("express");
 
 passport.use(
   new LocalStrategy(async (username, password, done) => {

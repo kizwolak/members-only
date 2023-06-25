@@ -43,11 +43,11 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use((req, res, next) => {
-  console.log(req.session);
-  console.log(req.user);
-  next();
-});
+// app.use((req, res, next) => {
+//   console.log(req.session);
+//   console.log(req.user);
+//   next();
+// });
 
 app.use(logger("dev"));
 app.use(express.json());
@@ -58,6 +58,7 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
 app.use("/club-manage", clubManageRouter);
+app.use("/clubs", clubManageRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

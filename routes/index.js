@@ -1,6 +1,8 @@
 const express = require("express");
 const router = express.Router();
+const Club = require("../models/club");
 const AuthenticationController = require("../controllers/AuthenticationController");
+const asyncHandler = require("express-async-handler");
 
 /* GET home page. */
 router.get("/", function (req, res, next) {
@@ -17,10 +19,18 @@ router.get("/log-in", (req, res, next) => {
 });
 router.post("/log-in", AuthenticationController.login);
 
-router.get("/homepage", (req, res, next) => {
-  const user = req.user;
-  console.log("session: " + req.session.id);
-  res.render("homepage", { user: user });
-});
+router.get(
+  "/homepage",
+  asyncHandler(async (req, res, next) => {
+    const user = req.user;
+    const clubs = [];
+    for (const club of user.club) {
+      const foundClub = await Club.findById(club._id).exec();
+      clubs.push(foundClub);
+    }
+    console.log("clubs: " + clubs);
+    res.render("homepage", { user: user, clubs: clubs });
+  })
+);
 
 module.exports = router;

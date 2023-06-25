@@ -7,6 +7,11 @@ router.get("/create-club", (req, res, next) => {
 });
 router.post("/create-club", ClubManageController.create);
 
-router.get("/clubs/view-club/:id", ClubManageController.display);
+router.get("/view-club/:id", ClubManageController.display);
+
+router.get("/join-club", (req, res, next) => {
+  res.render("join-club");
+});
+router.post("/join-club", ClubManageController.join);
 
 module.exports = router;

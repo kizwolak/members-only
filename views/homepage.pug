@@ -11,6 +11,7 @@ block content
                 a(class="btn btn-success" href="/club-manage/join-club") Join a Club
             .d-flex.flex-column.align-items-center(style="gap: 2rem;") 
                 h3 Club list
+                if clubs
                 for club in clubs 
                     a(href=club.url) #{club.name}
 

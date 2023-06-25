@@ -7,6 +7,11 @@ const MessageSchema = new Schema({
   message: { type: String, required: true, maxLength: 500 },
   user: { type: Schema.ObjectId, ref: "User" },
   timestamp: { type: Date, default: Date.now },
+  parent_message: { type: Schema.ObjectId, required: false },
+});
+
+MessageSchema.virtual("url").get(function () {
+  return "/messages/" + this._id;
 });
 
 module.exports = mongoose.model("Message", MessageSchema);

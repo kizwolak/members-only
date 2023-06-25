@@ -14,4 +14,8 @@ router.get("/join-club", (req, res, next) => {
 });
 router.post("/join-club", ClubManageController.join);
 
+router.get("view-club/:id/create-post", (req, res, next) => {
+  res.render("create-post");
+});
+
 module.exports = router;

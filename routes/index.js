@@ -33,4 +33,8 @@ router.get(
   })
 );
 
+router.get("/failure", (req, res, next) => {
+  res.render("failure");
+});
+
 module.exports = router;

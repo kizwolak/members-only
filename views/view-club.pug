@@ -10,4 +10,4 @@ block content
             ul 
                 for member in members
                     li #{member.full_name} (#{member.username})
-    a(href="/create-post" class="btn btn-primary") Create a post
+    a(href=`./${id}/create-post` class="btn btn-primary") Create a post

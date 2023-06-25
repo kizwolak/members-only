@@ -35,6 +35,7 @@ exports.createPost = [
       const message = new Message({
         title: req.body.title,
         message: req.body.message,
+        creator: req.user.id,
       });
       const result = await message.save();
       Club.findOneAndUpdate(

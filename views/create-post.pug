@@ -9,7 +9,8 @@ block content
             input(type="text" name="title" placeholder="title" class="form-control" id="title" value=(undefined===title ? '' : title))
         .form-group 
             label(for="message") Message     
-            input(type="message" name="message" placeholder="message" class="form-control" id="message" value(undefined === message ? '' : message))
+            textarea(name="message" placeholder="message" class="form-control" id="message" value=(undefined === message ? '' : message))
+            button(type="submit" class="btn btn-success") Create new post
     if errors 
         ul 
             for error in errors 

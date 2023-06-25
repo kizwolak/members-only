@@ -44,6 +44,7 @@ exports.display = asyncHandler(async (req, res, next) => {
     title: club.name,
     code: club.join_code,
     members: members,
+    id: req.params.id,
   });
 });
 

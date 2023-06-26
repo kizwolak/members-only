@@ -3,7 +3,7 @@ extends layout
 block content 
 
     h2 Create new post
-    form(action="/create-post", method="post")
+    form(action=``, method="post")
         .form-group 
             label(for="title") Title 
             input(type="text" name="title" placeholder="title" class="form-control" id="title" value=(undefined===title ? '' : title))

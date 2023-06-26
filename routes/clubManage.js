@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const ClubManageController = require("../controllers/ClubManageController");
+const ClubController = require("../controllers/ClubController");
 
 router.get("/create-club", (req, res, next) => {
   res.render("create-club");
@@ -19,5 +20,7 @@ router.get("/view-club/:id/create-post", (req, res, next) => {
     id: req.params.id,
   });
 });
+router.post("/view-club/:id/create-post", ClubController.createPost);
 
 module.exports = router;
+2;

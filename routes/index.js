@@ -28,7 +28,6 @@ router.get(
       const foundClub = await Club.findById(club._id).exec();
       clubs.push(foundClub);
     }
-    console.log("clubs: " + clubs);
     res.render("homepage", { user: user, clubs: clubs });
   })
 );

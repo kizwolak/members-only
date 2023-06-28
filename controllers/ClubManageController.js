@@ -3,6 +3,7 @@ const { body, validationResult } = require("express-validator");
 const asyncHandler = require("express-async-handler");
 const Club = require("../models/club");
 const User = require("../models/user");
+const Message = require("../models/message");
 
 exports.create = [
   body("name", "Name must be specified").trim().isLength({ min: 1 }).escape(),
@@ -40,17 +41,20 @@ exports.create = [
 exports.display = asyncHandler(async (req, res, next) => {
   const club = await Club.findById(req.params.id).exec();
   const members = await User.find({ club: club._id }).exec();
+  const titles = await Message.find({ _id: { $in: club.messages } })
+    .select("title")
+    .exec();
   res.render("view-club", {
     title: club.name,
     code: club.join_code,
     members: members,
     id: req.params.id,
+    titles: titles,
   });
 });
 
 exports.join = asyncHandler(async (req, res, next) => {
   const club = await Club.findOne({ join_code: req.body.code }).exec();
-  console.log("joined club: " + club);
   await User.findOneAndUpdate(
     { _id: req.user._id },
     { $push: { club: club._id } }

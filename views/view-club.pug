@@ -11,3 +11,8 @@ block content
                 for member in members
                     li #{member.full_name} (#{member.username})
     a(href=`./${id}/create-post` class="btn btn-primary") Create a post
+    .d-flex.flex-column.float-start.align-items-center(style="gap: 1rem")
+    h3 Messages: 
+        ul 
+            for title in titles 
+                a(href=`/view-post`) #{title.title}

@@ -38,10 +38,10 @@ exports.createPost = [
         creator: req.user.id,
       });
       const result = await message.save();
-      Club.findOneAndUpdate(
+      await Club.findOneAndUpdate(
         { _id: req.params.id },
         { $push: { messages: message._id } }
-      );
+      ).exec();
       res.render("view-post", {
         title: result.title,
         message: result.message,

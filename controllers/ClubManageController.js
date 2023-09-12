@@ -38,7 +38,7 @@ exports.create = [
   }),
 ];
 
-exports.display = asyncHandler(async (req, res, next) => {
+exports.displayClub = asyncHandler(async (req, res, next) => {
   const club = await Club.findById(req.params.id).exec();
   const members = await User.find({ club: club._id }).exec();
   const titles = await Message.find({ _id: { $in: club.messages } })

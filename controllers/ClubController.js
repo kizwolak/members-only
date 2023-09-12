@@ -3,7 +3,7 @@ const { body, validationResult } = require("express-validator");
 const asyncHandler = require("express-async-handler");
 const Club = require("../models/club");
 const User = require("../models/user");
-const Message = require("../models/message");
+const Post = require("../models/message");
 
 exports.createPost = [
   body("title", "Title must be specified")
@@ -32,12 +32,12 @@ exports.createPost = [
     }
 
     try {
-      const message = new Message({
+      const post = new Post({
         title: req.body.title,
         message: req.body.message,
         creator: req.user.id,
       });
-      const result = await message.save();
+      const result = await post.save();
       await Club.findOneAndUpdate(
         { _id: req.params.id },
         { $push: { messages: message._id } }
@@ -51,5 +51,18 @@ exports.createPost = [
     }
   }),
 ];
+
+exports.viewPost = asyncHandler(async (req, res, next) => {
+  try {
+    const post = await Post.findOne({ _id: req.params.id });
+    res.render("view-post", {
+      title: post.title,
+      message: post.message,
+    });
+  } catch (err) {
+    console.log("req.params.id: " + req.params.id);
+    return next(err);
+  }
+});
 
 // RCp6-m3Ut-XsSc

@@ -12,7 +12,7 @@ block content
                     li #{member.full_name} (#{member.username})
     a(href=`./${id}/create-post` class="btn btn-primary") Create a post
     .d-flex.flex-column.float-start.align-items-center(style="gap: 1rem")
-    h3 Messages: 
+    h3 Posts: 
         ul 
             for title in titles 
-                a(href=`/view-post`) #{title.title}
+                a(href=`/clubs/view-post/${title.id}`) #{title.title}

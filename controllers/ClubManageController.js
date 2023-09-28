@@ -55,11 +55,18 @@ exports.displayClub = asyncHandler(async (req, res, next) => {
 
 exports.join = asyncHandler(async (req, res, next) => {
   const club = await Club.findOne({ join_code: req.body.code }).exec();
-  await User.findOneAndUpdate(
-    { _id: req.user._id },
-    { $push: { club: club._id } }
-  );
-  res.redirect("../homepage");
+  const user = await User.findOne({ _id: req.user._id });
+  if (user.club.includes(club._id)) {
+    res.render("../homepage", {
+      error: "You have already joined this club.",
+    });
+  } else {
+    await User.findOneAndUpdate(
+      { _id: req.user._id },
+      { $push: { club: club._id } }
+    );
+    res.redirect("../homepage");
+  }
 });
 
 // ErYM-9KM0-srLb

@@ -9,6 +9,9 @@ block content
                 a(href="" style="margin-right: 4rem;") #{user.username} 
                 a(class="btn btn-primary" href="/club-manage/create-club") Create a Club 
                 a(class="btn btn-success" href="/club-manage/join-club") Join a Club
+            if (error)
+                .d-flex
+                    p(class="alert-danger") #{error}
             .d-flex.flex-column.align-items-center(style="gap: 2rem;") 
                 h3 Club list
                 if clubs
